@@ -1,0 +1,22 @@
+{
+  "name": "convertjson2xml",
+  "version": "1.0.0",
+  "description": "converts json to xml",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rshyong/convertJSON2XML.git"
+  },
+  "author": "Richard Shyong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rshyong/convertJSON2XML/issues"
+  },
+  "homepage": "https://github.com/rshyong/convertJSON2XML#readme"
+}
