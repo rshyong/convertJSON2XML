@@ -1,4 +1,5 @@
 convertJSON2XML
+[![Build Status](https://travis-ci.org/rshyong/convertJSON2XML.svg?branch=master)](https://travis-ci.org/rshyong/convertJSON2XML)
 =========
 
 A small library that converts json to xml.
