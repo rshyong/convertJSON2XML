@@ -18,11 +18,11 @@ A small library that converts json to xml.
   
   
   Output should be 
-  <root>
+  ```<root>
     <a>1</a>
     <b>2</b>
     <b>3</b>
-  </root>
+  </root>```
 
 ## Tests
 
