@@ -9,13 +9,14 @@ A small library that converts json to xml.
 
 ## Usage
 
-    let jsonToXML = require('convertjson2xml');
+```
+    const jsonToXML = require('convertjson2xml');
 
     let xml = jsonToXML({
       a: 1,
       b: [2,3],
     });
-  
+```
   
   Output should be 
   ```
