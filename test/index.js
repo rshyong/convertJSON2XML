@@ -37,8 +37,9 @@ describe('jsonToXML', () => {
         c: [ 'alpha', 3, [ 4, 5, 6 ], { test: 1, undefined: null, }, undefined, null, [], ],
         d: undefined,
         e: null,
+        f: { json: 'xml', },
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?> <root> <a>1</a> <b></b> <c>alpha</c> <c>3</c> <c> <0>4</0> <1>5</1> <2>6</2></c> <c> <test>1</test> <undefined null="true"/></c> <c undefined="true"/> <c null="true"/> <c></c> <d undefined="true"/> <e null="true"/></root>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?> <root> <a>1</a> <b></b> <c>alpha</c> <c>3</c> <c> <0>4</0> <1>5</1> <2>6</2></c> <c> <test>1</test> <undefined null="true"/></c> <c undefined="true"/> <c null="true"/> <c></c> <d undefined="true"/> <e null="true"/> <f> <json>xml</json></f></root>');
     });
   });
 });
