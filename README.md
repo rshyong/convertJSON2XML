@@ -32,6 +32,62 @@ Output should be
   </root>
 ```
 
+To put attributes on a tag, use the '@' field:
+
+```
+  let xml = jsonToXML({
+    a: {
+      '@': {
+        'attribute': 'true',
+      },
+      value: 1,
+    },
+    b: [2,3],
+  });
+
+  console.log(xml);
+```
+
+Output should be
+
+```
+  <root>
+    <a attribute='true'>
+      <value>1</value>
+    </a>
+    <b>2</b>
+    <b>3</b>
+  </root>
+```
+
+You can also change the root field by inserting it as the second argument:
+
+```
+  let xml = jsonToXML({
+    a: {
+      '@': {
+        'attribute': 'true',
+      },
+      value: 1,
+    },
+    b: [2,3],
+  },'thisisthenewroot');
+
+  console.log(xml);
+```
+
+Output should be
+
+```
+  <thisisthenewroot>
+    <a attribute='true'>
+      <value>1</value>
+    </a>
+    <b>2</b>
+    <b>3</b>
+  </thisisthenewroot>
+```
+
 ## Tests
 
   `npm test`
