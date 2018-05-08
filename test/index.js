@@ -38,8 +38,9 @@ describe('jsonToXML', () => {
         d: undefined,
         e: null,
         f: { '@': { attribute: 'value', }, json: 'xml', },
+        g: { '@': { animal: true, }, _: 'partOfG', },
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c>alpha</c>\n\t\t<c>3</c>\n\t\t<c>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</c>\n\t\t<c>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</c>\n\t\t<c undefined="true"/>\n\t\t<c null="true"/>\n\t\t<c></c>\n\t\t<d undefined="true"/>\n\t\t<e null="true"/>\n\t\t<f attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</f>\n\t</root>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c>alpha</c>\n\t\t<c>3</c>\n\t\t<c>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</c>\n\t\t<c>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</c>\n\t\t<c undefined="true"/>\n\t\t<c null="true"/>\n\t\t<c></c>\n\t\t<d undefined="true"/>\n\t\t<e null="true"/>\n\t\t<f attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</f>\n\t\t<g animal=\'true\'>partOfG</g>\n\t</root>');
     });
   });
 });

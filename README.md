@@ -43,6 +43,12 @@ To put attributes on a tag, use the '@' field:
       value: 1,
     },
     b: [2,3],
+    c: {
+      '@': {
+        anotherAttribute: 'true',
+      },
+      '_': 'insideC',
+    },
   });
 
   console.log(xml);
@@ -57,6 +63,7 @@ Output should be
     </a>
     <b>2</b>
     <b>3</b>
+    <c anotherAttribute='true'>insideC</c>
   </root>
 ```
 
@@ -71,6 +78,12 @@ You can also change the root field by inserting it as the second argument:
       value: 1,
     },
     b: [2,3],
+    c: {
+      '@': {
+        anotherAttribute: 'true',
+      },
+      '_': 'insideC',
+    },
   },'thisisthenewroot');
 
   console.log(xml);
@@ -85,6 +98,7 @@ Output should be
     </a>
     <b>2</b>
     <b>3</b>
+    <c anotherAttribute='true'>insideC</c>
   </thisisthenewroot>
 ```
 
