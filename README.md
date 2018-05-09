@@ -17,6 +17,9 @@ A small library that converts json to xml.
   let xml = jsonToXML({
     a: 1,
     b: [2,3],
+    c: [],
+    d: {},
+    e: '',
   });
 
   console.log(xml);
@@ -29,6 +32,9 @@ Output should be
     <a>1</a>
     <b>2</b>
     <b>3</b>
+    <c></c>
+    <d></d>
+    <e/>
   </root>
 ```
 
