@@ -1,6 +1,6 @@
 {
   "name": "convertjson2xml",
-  "version": "0.1.7a",
+  "version": "0.1.7b",
   "description": "converts json to xml",
   "main": "index.js",
   "directories": {
