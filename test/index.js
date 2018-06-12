@@ -47,11 +47,11 @@ describe('jsonToXML', () => {
       expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c></c>\n\t\t<d>alpha</d>\n\t\t<d>3</d>\n\t\t<d>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</d>\n\t\t<d>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</d>\n\t\t<d undefined="true"/>\n\t\t<d null="true"/>\n\t\t<d></d>\n\t\t<e undefined="true"/>\n\t\t<f null="true"/>\n\t\t<g attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</g>\n\t\t<h animal=\'true\'>partOfG</h>\n\t\t<i/>\n\t</root>');
     });
   });
-  describe('is configurable', () => {
+  describe('configurations', () => {
     beforeEach(() => {
       convertJSON2XML.clear();
     });
-    it('changing root tag', () => {
+    it('can change root tag', () => {
       jsonToXML = convertJSON2XML({
         rootTag: 'changedRoot',
       });
