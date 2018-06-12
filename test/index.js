@@ -1,9 +1,11 @@
 'use strict';
 
 const expect = require('chai').expect;
-const jsonToXML = require('../lib');
+const convertJSON2XML = require('../lib');
+let jsonToXML;
 
 describe('jsonToXML', () => {
+  jsonToXML = convertJSON2XML();
   describe('should return an error if:', () => {
     it('input is a string', () => {
       let stringInput = jsonToXML('this is a string');
@@ -45,11 +47,17 @@ describe('jsonToXML', () => {
       expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c></c>\n\t\t<d>alpha</d>\n\t\t<d>3</d>\n\t\t<d>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</d>\n\t\t<d>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</d>\n\t\t<d undefined="true"/>\n\t\t<d null="true"/>\n\t\t<d></d>\n\t\t<e undefined="true"/>\n\t\t<f null="true"/>\n\t\t<g attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</g>\n\t\t<h animal=\'true\'>partOfG</h>\n\t\t<i/>\n\t</root>');
     });
   });
-  describe('can change the root tag', () => {
-    it('if second argument is passed into the function', () => {
+  describe('is configurable', () => {
+    beforeEach(() => {
+      convertJSON2XML.clear();
+    });
+    it('changing root tag', () => {
+      jsonToXML = convertJSON2XML({
+        rootTag: 'changedRoot',
+      });
       let xml = jsonToXML({
         a: 1
-      }, 'changedRoot');
+      });
       expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<changedRoot>\n\t\t<a>1</a>\n\t</changedRoot>');
     });
   });
