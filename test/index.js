@@ -37,21 +37,22 @@ describe('jsonToXML', () => {
         a: 1,
         b: [],
         c: {},
-        d: [ 'alpha', 3, [ 4, 5, 6 ], { test: 1, undefined: null, }, undefined, null, [], ],
+        d: [ 'alpha ', 3, [ 4, 5, 6 ], { test: 1, undefined: null, }, undefined, null, [], ],
         e: undefined,
         f: null,
-        g: { '@': { attribute: 'value', }, json: 'xml', },
-        h: { '@': { animal: true, }, _: 'partOfG', },
+        g: { '@': { attribute: 'value ', }, json: ' xml ', },
+        h: { '@': { ' animal': true, }, _: ' partOfH', },
         i: '',
+        j: ' ',
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c></c>\n\t\t<d>alpha</d>\n\t\t<d>3</d>\n\t\t<d>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</d>\n\t\t<d>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</d>\n\t\t<d undefined="true"/>\n\t\t<d null="true"/>\n\t\t<d></d>\n\t\t<e undefined="true"/>\n\t\t<f null="true"/>\n\t\t<g attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</g>\n\t\t<h animal=\'true\'>partOfG</h>\n\t\t<i/>\n\t</root>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>1</a>\n\t\t<b></b>\n\t\t<c></c>\n\t\t<d>alpha </d>\n\t\t<d>3</d>\n\t\t<d>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</d>\n\t\t<d>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</d>\n\t\t<d undefined="true"/>\n\t\t<d null="true"/>\n\t\t<d></d>\n\t\t<e undefined="true"/>\n\t\t<f null="true"/>\n\t\t<g attribute=\'value \'>\n\t\t\t<json> xml </json>\n\t\t</g>\n\t\t<h  animal=\'true\'> partOfH</h>\n\t\t<i/>\n\t\t<j> </j>\n\t</root>');
     });
   });
-  describe('configurations', () => {
+  describe('configurations:', () => {
     beforeEach(() => {
       convertJSON2XML.clear();
     });
-    it('can change root tag', () => {
+    it('change root tag', () => {
       jsonToXML = convertJSON2XML({
         rootTag: 'changedRoot',
       });
@@ -59,6 +60,69 @@ describe('jsonToXML', () => {
         a: 1
       });
       expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<changedRoot>\n\t\t<a>1</a>\n\t</changedRoot>');
+    });
+    it('trim contents', () => {
+      jsonToXML = convertJSON2XML({
+        trim: true,
+      });
+      let xml = jsonToXML({
+        a: [ 'alpha ', 3, [ 4, 5, 6 ], { test: 1, undefined: null, }, undefined, null, [], ],
+        b: { '@': { attribute: 'value ', }, json: ' xml ', },
+        c: { '@': { ' animal': true, }, _: ' partOfC', },
+        d: '',
+        e: ' ',
+        f: ' hi '
+      });
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>alpha</a>\n\t\t<a>3</a>\n\t\t<a>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</a>\n\t\t<a>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</a>\n\t\t<a undefined="true"/>\n\t\t<a null="true"/>\n\t\t<a></a>\n\t\t<b attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</b>\n\t\t<c animal=\'true\'>partOfC</c>\n\t\t<d/>\n\t\t<e/>\n\t\t<f>hi</f>\n\t</root>');
+    });
+    it('trim and show empty strings', () => {
+      jsonToXML = convertJSON2XML({
+        trim: true,
+        emptyStringTag: 'full',
+      });
+      let xml = jsonToXML({
+        a: '',
+        b: ' '
+      });
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a></a>\n\t\t<b></b>\n\t</root>');
+    });
+    it('full null tags', () => {
+      jsonToXML = convertJSON2XML({
+        trim: true,
+        nullValueTag: 'full',
+      });
+      let xml = jsonToXML({
+        a: null,
+      });
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a></a>\n\t</root>');
+    });
+    it('hide undefined tags', () => {
+      jsonToXML = convertJSON2XML({
+        trim: true,
+        hideUndefinedTag: true,
+      });
+      let xml = jsonToXML({
+        a: 'null',
+        b: undefined,
+      });
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>null</a>\n\t</root>');
+    });
+    it('configurations all turned on', () => {
+      jsonToXML = convertJSON2XML({
+        trim: true,
+        hideUndefinedTag: true,
+        nullValueTag: 'full',
+        emptyStringTag: 'full',
+      });
+      let xml = jsonToXML({
+        a: null,
+        b: undefined,
+        c: '',
+        d: ' ',
+        e: [],
+        f: {},
+      });
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a></a>\n\t\t<c></c>\n\t\t<d></d>\n\t\t<e></e>\n\t\t<f></f>\n\t</root>');
     });
   });
 });
