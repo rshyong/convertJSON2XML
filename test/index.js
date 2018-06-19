@@ -109,6 +109,7 @@ describe('jsonToXML', () => {
         hideUndefinedTag: true,
         nullValueTag: 'full',
         emptyStringTag: 'full',
+        formatting: false,
         rootTag: 'Envelope',
       });
       let xml = instance({
@@ -122,7 +123,7 @@ describe('jsonToXML', () => {
         e: [],
         f: {},
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\n\t\t<a></a>\n\t\t<c></c>\n\t\t<d></d>\n\t\t<e></e>\n\t\t<f></f>\n\t</Envelope>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?><Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><a></a><c></c><d></d><e></e><f></f></Envelope>');
     });
   });
 });
