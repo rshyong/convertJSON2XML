@@ -69,7 +69,7 @@ describe('jsonToXML', () => {
         e: ' ',
         f: ' hi '
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>alpha</a>\n\t\t<a>3</a>\n\t\t<a>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</a>\n\t\t<a>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</a>\n\t\t<a undefined="true"/>\n\t\t<a null="true"/>\n\t\t<a></a>\n\t\t<b attribute=\'value\'>\n\t\t\t<json>xml</json>\n\t\t</b>\n\t\t<c animal=\'true\'>partOfC</c>\n\t\t<d/>\n\t\t<e/>\n\t\t<f>hi</f>\n\t</root>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a>alpha</a>\n\t\t<a>3</a>\n\t\t<a>\n\t\t\t<0>4</0>\n\t\t\t<1>5</1>\n\t\t\t<2>6</2>\n\t\t</a>\n\t\t<a>\n\t\t\t<test>1</test>\n\t\t\t<undefined null="true"/>\n\t\t</a>\n\t\t<a undefined="true"/>\n\t\t<a null="true"/>\n\t\t<a></a>\n\t\t<b attribute=\"value\">\n\t\t\t<json>xml</json>\n\t\t</b>\n\t\t<c animal=\"true\">partOfC</c>\n\t\t<d/>\n\t\t<e/>\n\t\t<f>hi</f>\n\t</root>');
     });
     it('trim and show empty strings', () => {
       let instance = convertJSON2XML.config({
@@ -109,8 +109,12 @@ describe('jsonToXML', () => {
         hideUndefinedTag: true,
         nullValueTag: 'full',
         emptyStringTag: 'full',
+        rootTag: 'Envelope',
       });
       let xml = instance({
+        '@': {
+          'xmlns:soapenv': 'http://schemas.xmlsoap.org/soap/envelope/',
+        },
         a: null,
         b: undefined,
         c: '',
@@ -118,7 +122,7 @@ describe('jsonToXML', () => {
         e: [],
         f: {},
       });
-      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<root>\n\t\t<a></a>\n\t\t<c></c>\n\t\t<d></d>\n\t\t<e></e>\n\t\t<f></f>\n\t</root>');
+      expect(xml).to.be.equal('<?xml version="1.0" encoding="UTF-8"?>\n\t<Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\n\t\t<a></a>\n\t\t<c></c>\n\t\t<d></d>\n\t\t<e></e>\n\t\t<f></f>\n\t</Envelope>');
     });
   });
 });
